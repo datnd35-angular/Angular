@@ -1,8 +1,13 @@
 **Biên dịch Ahead-of-Time (AOT)**
 
-Trình biên dịch Ahead-of-Time (AOT) của Angular chuyển đổi mã HTML và TypeScript của Angular thành mã JavaScript hiệu quả trong giai đoạn xây dựng. Giai đoạn xây dựng xảy ra trước khi trình duyệt tải và chạy mã đã được render. Đây là chế độ biên dịch tốt nhất cho môi trường sản xuất, với thời gian tải giảm và hiệu suất tăng so với biên dịch Just-in-Time (JIT).
+![image](https://github.com/user-attachments/assets/86f7daeb-bb3d-42e4-8ba7-cfbf78889b85)
 
-Bằng cách biên dịch ứng dụng của bạn sử dụng công cụ dòng lệnh `ngc`, bạn có thể khởi động trực tiếp vào một nhà máy module, vì vậy bạn không cần phải bao gồm trình biên dịch Angular trong gói JavaScript của mình.
+**Tại sao chúng ta lại cần AOT**
+
+**Ahead-of-Time (AOT)** là một kỹ thuật biên dịch trong Angular, trong đó mã nguồn TypeScript bao gồm `Angular template` của bạn được biên dịch sang JavaScript ngay sau khi bạn chạy lệnh `run build`, và rồi bạn đẩy cái file dist này lên host (server) khi browser lấy `source code` của bạn từ server thì nó đã là JavaScript ko cần biên dịch lại sẽ giúp tăng hiệu quả performace lên.
+
+**Just-in-Time (JIT)** thì khi bạn run build nó sẽ ko biên dịch ra `JavaScript` mà là một đống hỗn hợp (bao gồm  `Angular template` như ` {{ variable }} hoặc *ngFor`) cho nên khi `browser` lấy `source code` về nó sẽ phải `Angular parse & compliles template` để biên dịch sang `JS` điều này làm giảm `performace`.
+
 
 **Angular Element**
 
