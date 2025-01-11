@@ -6,7 +6,7 @@
 
 **Ahead-of-Time (AOT)** là một kỹ thuật biên dịch trong Angular, trong đó mã nguồn TypeScript bao gồm `Angular template` của bạn được biên dịch sang JavaScript ngay sau khi bạn chạy lệnh `run build`, và rồi bạn đẩy cái file dist này lên host (server) khi browser lấy `source code` của bạn từ server thì nó đã là JavaScript ko cần biên dịch lại sẽ giúp tăng hiệu quả performace lên.
 
-**Just-in-Time (JIT)** thì khi bạn run build nó sẽ ko biên dịch ra `JavaScript` mà là một đống hỗn hợp (bao gồm  `Angular template` như ` {{ variable }} hoặc *ngFor`) cho nên khi `browser` lấy `source code` về nó sẽ phải `Angular parse & compliles template` để biên dịch sang `JS` điều này làm giảm `performace`.
+Nếu không sử dụng `AOT` thì trong dự án angular chúng ta sẽ sử dụng **Just-in-Time (JIT)** và khi bạn run build nó sẽ ko biên dịch ra `JavaScript` mà là một đống hỗn hợp (bao gồm  `Angular template` như ` {{ variable }} hoặc *ngFor`) cho nên khi `browser` lấy `source code` về nó sẽ phải `Angular parse & compliles template` để biên dịch sang `JS` điều này làm giảm `performace`.
 
 
 **Angular Element**
