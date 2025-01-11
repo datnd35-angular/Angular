@@ -4,8 +4,6 @@ Trình biên dịch Ahead-of-Time (AOT) của Angular chuyển đổi mã HTML v
 
 Bằng cách biên dịch ứng dụng của bạn sử dụng công cụ dòng lệnh `ngc`, bạn có thể khởi động trực tiếp vào một nhà máy module, vì vậy bạn không cần phải bao gồm trình biên dịch Angular trong gói JavaScript của mình.
 
----
-
 **Angular Element**
 
 Một thành phần Angular được đóng gói dưới dạng một phần tử tùy chỉnh.
