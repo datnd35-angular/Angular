@@ -94,9 +94,7 @@ Sử dụng directive này trong HTML:
 <p appHighlight>This text will be highlighted on hover.</p>
 ```
 
-**Binding**
-
-### **Binding trong Angular là gì?**
+## **Binding**
 
 **Binding** trong Angular là một cơ chế cho phép bạn liên kết dữ liệu giữa **component** và **view** (giao diện người dùng).
 
