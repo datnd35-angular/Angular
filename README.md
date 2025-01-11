@@ -1,4 +1,4 @@
-**Biên dịch Ahead-of-Time (AOT)**
+## **Biên dịch Ahead-of-Time (AOT)**
 
 ![image](https://github.com/user-attachments/assets/86f7daeb-bb3d-42e4-8ba7-cfbf78889b85)
 
@@ -9,65 +9,174 @@
 Nếu không sử dụng `AOT` thì trong dự án angular chúng ta sẽ sử dụng **Just-in-Time (JIT)** và khi bạn run build nó sẽ ko biên dịch ra `JavaScript` mà là một đống hỗn hợp (bao gồm  `Angular template` như ` {{ variable }} hoặc *ngFor`) cho nên khi `browser` lấy `source code` về nó sẽ phải `Angular parse & compliles template` để biên dịch sang `JS` điều này làm giảm `performace`.
 
 
-**Angular Element**
+## **Angular Element**
 
-Một thành phần Angular được đóng gói dưới dạng một phần tử tùy chỉnh.
+**Angular Element** là cho phép bạn tạo ra các **custom elements** (thẻ HTML tự do) từ các component Angular. Các Angular Element này có thể được sử dụng giống như các thẻ HTML thông thường trong bất kỳ ứng dụng web nào, bao gồm cả các ứng dụng không phải Angular.
 
-Tìm hiểu thêm trong [Tổng quan về Angular Elements](#).
+**1. Với file Html nằm trong Angular project**
 
----
+<img width="693" alt="image" src="https://github.com/user-attachments/assets/67919d74-2a9f-4fad-afed-48f5a199a1e4" />
 
-**Angular Package Format (APF)**
+**2. Với file Html không nằm trong Angular project thì phải làm sao**
 
-Một đặc tả riêng của Angular về cấu trúc các gói npm, được sử dụng bởi tất cả các gói Angular chính thức và hầu hết các thư viện Angular của bên thứ ba.
+Build Angular project (dist) từ 1 file html sử dụng javascrript để trỏ vào file js trong dist.
 
-Tìm hiểu thêm trong [Đặc tả Angular Package Format](#).
+<img width="693" alt="image" src="https://github.com/user-attachments/assets/3c15ebbe-66c9-4b14-a3d3-0fc890de0101" />
 
----
 
-**Chú thích (Annotation)**
+**3. Các đặc điểm chính của Angular Elements:**
 
-Một cấu trúc cung cấp metadata cho một lớp. Để tìm hiểu thêm, xem [Decorator](#).
+1. **Custom Elements**: Angular Elements là một cách để tạo các custom elements (thẻ HTML tùy chỉnh). Custom elements là một phần của Web Components API, và Angular giúp bạn dễ dàng tạo ra chúng từ các component Angular.
+  
+2. **Web Components**: Các Angular Element tuân thủ các tiêu chuẩn của web components như Shadow DOM, Custom Elements, và HTML Templates. Điều này giúp bạn có thể sử dụng các Angular component mà không phụ thuộc vào Angular CLI hay Angular framework.
 
----
+3. **Reusability**: Bạn có thể sử dụng các Angular Element ở bất kỳ nơi nào, bao gồm các ứng dụng không phải Angular. Đây là một cách tuyệt vời để tái sử dụng các thành phần của Angular trong các hệ sinh thái khác.
 
-**App-Shell**
 
-App shell là cách để render một phần của ứng dụng sử dụng một route trong thời gian xây dựng. Điều này giúp người dùng thấy một lớp sơn đầu tiên có ý nghĩa về ứng dụng của bạn nhanh chóng vì trình duyệt có thể render HTML và CSS tĩnh mà không cần khởi tạo JavaScript.
+## **Directive**
 
-Bạn có thể sử dụng Angular CLI để tạo ra một app shell. Điều này có thể cải thiện trải nghiệm người dùng bằng cách nhanh chóng mở một trang render tĩnh trong khi trình duyệt tải phiên bản client đầy đủ và tự động chuyển sang khi mã được tải xong. Một trang render tĩnh là một skeleton chung cho tất cả các trang.
+**Directive** là một công cụ cho phép bạn thêm Add, update, delete trên DOM (Document Object Model) trong ứng dụng.
 
-Tìm hiểu thêm trong [Mô hình App Shell](#) và [Service Worker và PWA](#).
 
----
+### **1. Structural Directives**  
+- Thay đổi cấu trúc của DOM bằng cách thêm, xóa hoặc sửa đổi các phần tử HTML.
+- Các directive này thường dùng dấu `*` ở phía trước tên directive.
 
-**Kiến trúc (Architect)**
+**Ví dụ:** `*ngIf`, `*ngFor`, `*ngSwitch`
+```html
+<div *ngIf="isVisible">
+  This is visible only if isVisible is true.
+</div>
 
-Công cụ mà Angular CLI sử dụng để thực hiện các tác vụ phức tạp như biên dịch và chạy kiểm thử, theo cấu hình đã cung cấp. Architect là một shell chạy một builder với cấu hình mục tiêu đã cho. Builder được định nghĩa trong một gói npm.
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+```
 
-Trong tệp cấu hình workspace, một phần "architect" cung cấp các tùy chọn cấu hình cho các builder của Architect.
+### **2. Attribute Directives**  
+- Thay đổi hoặc thao tác với các thuộc tính (attributes) của phần tử HTML mà không thay đổi cấu trúc DOM.
 
-Ví dụ, một builder tích hợp sẵn để linting được định nghĩa trong gói `@angular-devkit/build_angular:tslint`, sử dụng công cụ TSLint để thực hiện linting, với cấu hình được chỉ định trong tệp `tslint.json`.
+**Ví dụ:** `ngClass`, `ngStyle`, directive tùy chỉnh
+```html
+<div [ngClass]="{ 'highlight': isActive }">
+  This div will have 'highlight' class if isActive is true.
+</div>
 
-Sử dụng lệnh Angular CLI `ng run` để gọi một builder bằng cách chỉ định cấu hình mục tiêu liên kết với builder đó. Các tích hợp viên có thể thêm các builder để kích hoạt các công cụ và quy trình làm việc thông qua Angular CLI. Ví dụ, một builder tùy chỉnh có thể thay thế các công cụ của bên thứ ba được sử dụng trong các triển khai tích hợp sẵn cho các lệnh Angular CLI, chẳng hạn như `ng build` hoặc `ng test`.
+<div [ngStyle]="{ 'color': textColor }">
+  This text will have dynamic color.
+</div>
+```
+### **3. Custom Directives**  
+- Bạn có thể tạo directive tùy chỉnh để thêm hành vi cho các phần tử HTML.
 
----
+**Ví dụ tạo một Attribute Directive tùy chỉnh**
+```typescript
+import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
 
-**Directive thuộc tính (Attribute Directive)**
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
-Một loại directive có thể lắng nghe và thay đổi hành vi của các phần tử HTML khác, thuộc tính, các thuộc tính và thành phần. Chúng thường được biểu thị dưới dạng các thuộc tính HTML, do đó có tên như vậy.
+  @HostListener('mouseenter') onMouseEnter() {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', 'yellow');
+  }
 
-Tìm hiểu thêm trong [Attribute Directives](#).
+  @HostListener('mouseleave') onMouseLeave() {
+    this.renderer.removeStyle(this.el.nativeElement, 'backgroundColor');
+  }
+}
+```
 
----
+Sử dụng directive này trong HTML:
+```html
+<p appHighlight>This text will be highlighted on hover.</p>
+```
 
 **Binding**
 
-Thông thường, việc thiết lập một biến hoặc thuộc tính với một giá trị dữ liệu. Trong Angular, thường đề cập đến data binding, là việc phối hợp các thuộc tính của đối tượng DOM với các thuộc tính của đối tượng dữ liệu.
+### **Binding trong Angular là gì?**
 
-Đôi khi cũng đề cập đến một binding tiêm phụ thuộc giữa một token và một nhà cung cấp phụ thuộc.
+**Binding** trong Angular là một cơ chế cho phép bạn liên kết dữ liệu giữa **component** và **view** (giao diện người dùng).
 
----
+### **1. Interpolation (Interpolation Binding)**
+
+**Định nghĩa:**  
+Interpolation là cách đơn giản nhất để hiển thị giá trị dữ liệu từ component vào trong HTML. Nó sử dụng dấu ngoặc kép `{{ }}`.
+
+**Cách sử dụng:**
+```html
+<p>{{ message }}</p>
+```
+**Component:**
+```typescript
+export class AppComponent {
+  message: string = 'Hello, Angular!';
+}
+```
+### **2. Property Binding**
+
+**Định nghĩa:**  
+Property binding giúp bạn liên kết dữ liệu từ component với thuộc tính của một phần tử HTML, ví dụ như thuộc tính `src`, `disabled`, `class`, v.v.
+
+**Cách sử dụng:**
+```html
+<img [src]="imageUrl" alt="Image">
+<button [disabled]="isDisabled">Click Me</button>
+```
+**Component:**
+```typescript
+export class AppComponent {
+  imageUrl: string = 'https://example.com/image.jpg';
+  isDisabled: boolean = false;
+}
+```
+
+### **3. Event Binding**
+
+**Định nghĩa:**  
+Event binding cho phép bạn lắng nghe các sự kiện như `click`, `keyup`, v.v., và xử lý chúng trong component khi người dùng tương tác với giao diện.
+
+**Cách sử dụng:**
+```html
+<button (click)="onClick()">Click Me</button>
+```
+**Component:**
+```typescript
+export class AppComponent {
+  onClick() {
+    console.log('Button clicked!');
+  }
+}
+```
+
+
+### **4. Two-way Data Binding (NgModel)**
+
+**Định nghĩa:**  
+Two-way data binding là một cơ chế cho phép đồng bộ hóa dữ liệu giữa component và view, nghĩa là thay đổi trong component sẽ cập nhật giao diện và ngược lại. Angular sử dụng `[(ngModel)]` để thực hiện two-way data binding.
+
+**Cách sử dụng:**
+```html
+<input [(ngModel)]="username" placeholder="Enter your name">
+<p>Your name is: {{ username }}</p>
+```
+**Component:**
+```typescript
+export class AppComponent {
+  username: string = '';
+}
+```
+
+
+| **Kiểu Binding**        | **Cách sử dụng**                      | **Giải thích**                                  |
+|-------------------------|---------------------------------------|-------------------------------------------------|
+| **Interpolation**        | `{{ expression }}`                    | Hiển thị giá trị dữ liệu trong HTML.            |
+| **Property Binding**     | `[property]="expression"`            | Liên kết dữ liệu với thuộc tính của phần tử HTML.|
+| **Event Binding**        | `(event)="expression"`                | Liên kết sự kiện từ HTML đến component.         |
+| **Two-way Data Binding** | `[(ngModel)]="expression"`            | Đồng bộ hóa dữ liệu giữa component và view.     |
+
 
 **Bootstrap**
 
