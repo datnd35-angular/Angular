@@ -176,53 +176,62 @@ export class AppComponent {
 | **Two-way Data Binding** | `[(ngModel)]="expression"`            | Đồng bộ hóa dữ liệu giữa component và view.     |
 
 
-**Bootstrap**
+## **Bootstrapping**
 
-Cách để khởi tạo và khởi động một ứng dụng hoặc hệ thống.
+**Angular Bootstrapping** là quá trình khởi tạo một ứng dụng angular. Angular cần biết module gốc và component chính để bắt đầu tạo UI.
 
-Trong Angular, `AppModule` là `NgModule` gốc của một ứng dụng có thuộc tính `bootstrap` chỉ định các thành phần cấp cao nhất của ứng dụng. Trong quá trình bootstrap, Angular tạo và chèn các thành phần này vào trang web `index.html` chủ. Bạn có thể bootstrap nhiều ứng dụng trong cùng một `index.html`. Mỗi ứng dụng chứa các thành phần riêng của nó.
+**Sử dụng hàm `platformBrowserDynamic().bootstrapModule`**: Trong tập tin `main.ts`, Angular gọi hàm `platformBrowserDynamic().bootstrapModule(AppModule)` để khởi động ứng dụng bằng cách nạp `AppModule`.
 
-Tìm hiểu thêm trong [Bootstrapping](#).
+**Chi tiết về các mảng trong @NgModule**
+1. **declarations**:
+   - Đây là nơi khai báo các component, directive, pipe trong module.
+   - Mỗi component, directive, pipe phải được khai báo trong đúng một NgModule.
+   - Các thành phần này chỉ có thể được sử dụng trong module nơi chúng được khai báo hoặc trong các module khác khi được **import**.
 
----
+2. **imports**:
+   - Làm rõ những NgModules mà module này cần để hoạt động.
+   - Ví dụ: **BrowserModule**, **FormsModule**, **HttpClientModule** sẽ được khai báo ở đây nếu cần sử dụng trong ứng dụng.
 
-**Builder**
+3. **providers**:
+   - Là nơi khai báo các dịch vụ (services) mà ứng dụng cần.
+   - Dịch vụ này sẽ có phạm vi toàn ứng dụng (app-wide).
 
-Một hàm sử dụng API Architect để thực hiện một quá trình phức tạp như build hoặc test. Mã của builder được định nghĩa trong một gói npm.
+4. **bootstrap**:
+   - Đây là nơi xác định các component được tạo và chèn vào **DOM** khi ứng dụng khởi động.
+   - Thông thường, **AppComponent** sẽ được khai báo trong mảng **bootstrap**.
 
-Ví dụ, `BrowserBuilder` thực hiện một quá trình webpack build cho một mục tiêu trình duyệt, và `KarmaBuilder` khởi động máy chủ Karma và thực hiện một quá trình webpack build cho kiểm thử đơn vị.
 
-Lệnh Angular CLI `ng run` gọi một builder với cấu hình mục tiêu cụ thể. Tệp cấu hình workspace, `angular.json`, chứa các cấu hình mặc định cho các builder tích hợp sẵn.
+## **View**
 
----
+### **1. Angular view là gì?**
 
-**Các loại tên (Case Types)**
+<img width="425" alt="image" src="https://github.com/user-attachments/assets/d964a46c-d6f5-435e-ad5d-50346865b35d" />
 
-Angular sử dụng quy ước viết hoa để phân biệt tên của các loại khác nhau, như đã mô tả trong phần [Hướng dẫn Đặt Tên](#) trong Hướng dẫn Kiểu. Dưới đây là tóm tắt các loại tên:
+`Angular View` là một lớp trừu tượng bên trên `DOM`, giúp quản lý giao diện người dùng bằng cách liên kết dữ liệu với template thông qua data binding và `change detection`. Angular không thao tác trực tiếp trên DOM mà thao tác trên `View` trước, sau đó mới cập nhật `DOM` tương ứng.
 
-| **Chi tiết**         | **Ví dụ**                                                                 |
-|---------------------|----------------------------------------------------------------------------|
-| **camelCase**       | Biểu tượng, thuộc tính, phương thức, tên pipe, các selector directive không phải component. Sử dụng chữ cái thường cho chữ cái đầu tiên. Ví dụ: `selectedHero`. |
-| **UpperCamelCase / PascalCase** | Tên lớp, bao gồm các lớp định nghĩa thành phần, giao diện, NgModules, directive và pipe. Sử dụng chữ cái viết hoa cho chữ cái đầu tiên. Ví dụ: `HeroComponent`. |
-| **dash-case / kebab-case** | Phần mô tả của tên tệp, các selector component. Ví dụ: `app-hero-list`. |
-| **underscore_case / snake_case** | Không thường xuyên được sử dụng trong Angular. Snake case sử dụng các từ kết nối với dấu gạch dưới. Ví dụ: `convert_link_mode`. |
-| **UPPER_UNDERSCORE_CASE / UPPER_SNAKE_CASE / SCREAMING_SNAKE_CASE** | Truyền thống cho hằng số. Cách viết này có thể chấp nhận, nhưng camelCase được ưu tiên. Upper snake case sử dụng tất cả chữ cái viết hoa kết nối với dấu gạch dưới. Ví dụ: `FIX_ME`. |
+Có một số trường hợp bạn có thể thao tác trực tiếp với `DOM` vd: sử dụng `ElementRef`
 
----
+### **2. Cơ chế hoạt động:**
+Khi dữ liệu thay đổi, Angular sẽ chạy cơ chế change detection, phát hiện sự thay đổi và cập nhật view tương ứng, sau đó mới thao tác lên DOM. Điều này giúp tối ưu hiệu suất và giảm thiểu thao tác trực tiếp trên DOM.
 
-**Phát hiện thay đổi (Change Detection)**
+### **3. View State**
 
-Cơ chế mà framework Angular đồng bộ trạng thái của UI của một ứng dụng với trạng thái của dữ liệu. Trình phát hiện thay đổi kiểm tra trạng thái hiện tại của mô hình dữ liệu mỗi khi nó chạy và giữ nó như là trạng thái trước đó để so sánh trong lần lặp tiếp theo.
+Mỗi View có một số trạng thái đóng vai trò giúp Angular quyết định có chạy Change Detection cho View hay tất cả View child component của nó hoặc bỏ qua.
 
-Khi logic ứng dụng cập nhật dữ liệu thành phần, các giá trị được liên kết với các thuộc tính DOM trong view có thể thay đổi. Trình phát hiện thay đổi có trách nhiệm cập nhật view để phản ánh mô hình dữ liệu hiện tại. Tương tự, người dùng có thể tương tác với UI, gây ra các sự kiện thay đổi trạng thái của mô hình dữ liệu. Các sự kiện này có thể kích hoạt phát hiện thay đổi.
+**Một số trạng thái quan trọng**
+1. First Check
+2. Check Enable
+3. Errored
+4. Destroyed 
 
-Sử dụng chiến lược phát hiện thay đổi mặc định, trình phát hiện thay đổi đi qua phân cấp view trong mỗi lần lặp của VM để kiểm tra mọi thuộc tính liên kết dữ liệu trong mẫu. Trong giai đoạn đầu tiên, nó so sánh trạng thái hiện tại của dữ liệu phụ thuộc với trạng thái trước đó và thu thập các thay đổi. Trong giai đoạn thứ hai, nó cập nhật DOM của trang để phản ánh bất kỳ giá trị dữ liệu mới nào.
+Nếu `Check Enable` là `false` hoặc `View` ở trạng thái `Errored, Destroyed` thì sẽ bỏ qua `Change Detection`, mặc định  `Check Enable` là `true` trừ khi dùng `Onpush`.
 
-Nếu bạn đặt chiến lược phát hiện thay đổi là `OnPush`, trình phát hiện thay đổi chỉ chạy khi được gọi rõ ràng hoặc khi nó được kích hoạt bởi thay đổi tham chiếu `Input` hoặc trình xử lý sự kiện. Điều này thường cải thiện hiệu suất.
+Angular có nhiều khái niệm `high-level` để thao tác với view như `ViewContainerRef, TemplateRef, ViewChild, ElementRef, ViewRef`
 
-Tìm hiểu thêm trong [Tối ưu hóa Phát hiện Thay đổi trong Angular](#).
+`ViewRef` là một lớp trừu tượng đại diện cho một View được liên kết với một Change Detector. cụ thể bạn sử dụng khi bạn muốn một change detection thủ công.
 
----
+**Change Detection**
+
 
 **Decorator lớp (Class Decorator)**
 
@@ -833,14 +842,6 @@ Trong thực tế, điều này có nghĩa là dữ liệu trong Angular chảy 
 ### Server-side rendering
 Một công cụ để thực hiện server-side rendering cho một ứng dụng Angular. Khi tích hợp với ứng dụng, Universal tạo và phục vụ các trang tĩnh trên server để đáp ứng các yêu cầu từ trình duyệt. Trang tĩnh ban đầu phục vụ như một placeholder tải nhanh trong khi toàn bộ ứng dụng đang được chuẩn bị cho việc thực thi bình thường trong trình duyệt. Để tìm hiểu thêm, xem **Angular server-side rendering**.
 
-### view
-Nhóm các phần tử hiển thị nhỏ nhất có thể được tạo và hủy đồng thời. Angular hiển thị một view dưới sự điều khiển của một hoặc nhiều directive.
-
-Một lớp component và template của nó xác định một view. Một view cụ thể được đại diện bởi một instance `ViewRef` gắn liền với component. Một view thuộc ngay vào một component được gọi là host view. Các view thường được nhóm lại thành các hierarchies của view.
-
-Các thuộc tính của phần tử trong một view có thể thay đổi động, phản ứng với hành động của người dùng; nhưng cấu trúc (số lượng và thứ tự) của các phần tử trong một view thì không thể. Bạn có thể thay đổi cấu trúc của các phần tử bằng cách chèn, di chuyển hoặc xóa các view lồng trong các container view của chúng.
-
-Các hierarchies view có thể được tải và hủy động khi người dùng điều hướng qua ứng dụng, thường dưới sự điều khiển của một router.
 
 ### View Engine
 Một pipeline biên dịch và render trước đây được sử dụng bởi Angular. Nó đã được thay thế bởi Ivy và không còn được sử dụng nữa. View Engine đã bị deprecated trong phiên bản 9 và bị loại bỏ trong phiên bản 13.
