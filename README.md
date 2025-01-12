@@ -236,85 +236,11 @@ Angular có nhiều khái niệm `high-level` để thao tác với view như `V
 
 Khi có thay đổi, `Change Detection` sẽ cập nhật các `View` liên quan, và sau đó Angular sẽ cập nhật `DOM` dựa trên các thay đổi đó.
 
-## **Change Detection hoạt động thế nào**
+### **Change Detection hoạt động thế nào**
 
 
-**Decorator lớp (Class Decorator)**
 
-Một decorator xuất hiện ngay trước định nghĩa lớp, khai báo lớp đó thuộc loại đã cho và cung cấp metadata thích hợp cho loại đó.
-
-Các decorator sau có thể khai báo loại lớp Angular:
-- `@Component()`
-- `@Directive()`
-- `@Pipe()`
-- `@Injectable()`
-- `@NgModule()`
-
----
-
-**Decorator trường lớp (Class Field Decorator)**
-
-Một câu lệnh decorator ngay trước một trường trong định nghĩa lớp, khai báo loại của trường đó. Một số ví dụ là `@Input` và `@Output`.
-
----
-
-**Collection**
-
-Trong Angular, một bộ các schematics liên quan được thu thập trong một gói npm.
-
----
-
-**Giao diện Dòng Lệnh (CLI)**
-
-Angular CLI là công cụ dòng lệnh để quản lý vòng đời phát triển Angular. Sử dụng nó để tạo cấu trúc hệ thống tệp ban đầu cho một workspace hoặc dự án, và để chạy các schematics thêm và chỉnh sửa mã cho các phiên bản ban đầu của các phần tử khác nhau. Angular CLI hỗ trợ tất cả các giai đoạn của vòng đời phát triển, bao gồm xây dựng, kiểm thử, đóng gói và triển khai.
-
-- Để bắt đầu sử dụng Angular CLI cho một dự án mới, xem [Cài đặt Môi trường Cục bộ](#).
-- Để tìm hiểu thêm về đầy đủ khả năng của Angular CLI, xem [Tài liệu Lệnh Angular CLI](#).
-- Xem thêm [Schematics CLI](#).
-
----
-
-**Component**
-
-Một lớp với decorator `@Component()` liên kết nó với một template đi kèm. Cùng với nhau, lớp component và template định nghĩa một view. Một component là một loại đặc biệt của directive. Decorator `@Component()` mở rộng decorator `@Directive()` với các tính năng liên quan đến template.
-
-Lớp Angular component chịu trách nhiệm tiết lộ dữ liệu và xử lý phần lớn logic hiển thị và tương tác người dùng của view thông qua data binding.
-
-Tìm hiểu thêm trong [Giới thiệu về Các khái niệm Angular](#).
-
----
-
-**Cấu hình (Configuration)**
-
-Xem [Cấu hình Workspace](#).
-
----
-
-**Content Projection**
-
-Cách để chèn nội dung DOM từ bên ngoài một component vào view của component đó tại một điểm chỉ định.
-
-Tìm hiểu thêm trong [Phản ứng với Thay đổi trong Content](#).
-
-**Content Projection**
-
-Một cách để chèn nội dung DOM từ bên ngoài một component vào trong view của component ở một vị trí đã định.
-
-Để tìm hiểu thêm, xem [Responding to changes in content](#).
-
----
-
-**Custom Element**
-
-Một tính năng của nền tảng web, hiện được hỗ trợ bởi hầu hết các trình duyệt và có sẵn trên các trình duyệt khác thông qua polyfills. Xem [Browser support](#).
-
-Tính năng custom element mở rộng HTML bằng cách cho phép bạn định nghĩa một thẻ có nội dung được tạo ra và điều khiển bởi mã JavaScript. Một custom element được trình duyệt nhận diện khi nó được thêm vào `CustomElementRegistry`. Custom element cũng được gọi là một web component.
-
-Bạn có thể sử dụng API để chuyển đổi một Angular component sao cho nó có thể được đăng ký với trình duyệt và sử dụng trong bất kỳ HTML nào mà bạn thêm trực tiếp vào DOM trong một ứng dụng Angular. Thẻ custom element chèn view của component, với chức năng change-detection và data-binding, vào nội dung sẽ được hiển thị mà không cần Angular xử lý. Xem [Angular element](#). Cũng xem [Dynamic component loading](#).
-
----
-
-**Data Binding**
+## **Data Binding**
 
 Một quy trình cho phép các ứng dụng hiển thị các giá trị dữ liệu cho người dùng và phản hồi các hành động của người dùng. Các hành động của người dùng bao gồm nhấp chuột, chạm, nhấn phím, v.v.
 
