@@ -212,11 +212,11 @@ export class AppComponent {
 Có một số trường hợp bạn có thể thao tác trực tiếp với `DOM` vd: sử dụng `ElementRef`
 
 ### **2. Cơ chế hoạt động:**
-Khi dữ liệu thay đổi, Angular sẽ chạy cơ chế change detection, phát hiện sự thay đổi và cập nhật view tương ứng, sau đó mới thao tác lên DOM. Điều này giúp tối ưu hiệu suất và giảm thiểu thao tác trực tiếp trên DOM.
+Khi dữ liệu thay đổi,` Angular` sẽ chạy cơ chế `change detection`, phát hiện sự thay đổi và cập nhật `view` tương ứng, sau đó mới thao tác lên `DOM`. Điều này giúp tối ưu hiệu suất và giảm thiểu thao tác trực tiếp trên `DOM`.
 
 ### **3. View State**
 
-Mỗi View có một số trạng thái đóng vai trò giúp Angular quyết định có chạy Change Detection cho View hay tất cả View child component của nó hoặc bỏ qua.
+Mỗi `View` có một số trạng thái đóng vai trò giúp `Angular` quyết định có chạy `Change Detection` cho `View` hay tất cả `View child component` của nó hoặc bỏ qua.
 
 **Một số trạng thái quan trọng**
 1. First Check
@@ -230,7 +230,13 @@ Angular có nhiều khái niệm `high-level` để thao tác với view như `V
 
 `ViewRef` là một lớp trừu tượng đại diện cho một View được liên kết với một Change Detector. cụ thể bạn sử dụng khi bạn muốn một change detection thủ công.
 
-**Change Detection**
+## **Change Detection**
+
+**Change Detection** là quá trình mà Angular kiểm tra xem có thay đổi dữ liệu nào trong ứng dụng cần được phản ánh lên giao diện người dùng (UI) hay không.
+
+Khi có thay đổi, `Change Detection` sẽ cập nhật các `View` liên quan, và sau đó Angular sẽ cập nhật `DOM` dựa trên các thay đổi đó.
+
+## **Change Detection hoạt động thế nào**
 
 
 **Decorator lớp (Class Decorator)**
